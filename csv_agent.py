@@ -52,6 +52,16 @@ def seconds_to_hours(seconds):   #non mutual, just returns a string
     minutes = (seconds % 3600) // 60
     return f"{hours} hours and {minutes} minutes"
 
+def max_alt(list_altitude: list) -> int | None:
+    maximum = 0
+    if len(list_altitude) > 0:
+        for item in list_altitude:
+            item = int(item)
+            if item > maximum:
+                maximum = item
+        return maximum
+    else:
+        return None
 
 if __name__ == "__main__":
     # --- TEST SECTION ---

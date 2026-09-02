@@ -1,7 +1,7 @@
 # CSV scratch
 
 
-from csv_agent import load_csv_to_dict_list, calculate_duration, seconds_to_hours
+from csv_agent import load_csv_to_dict_list, calculate_duration, seconds_to_hours, max_alt
 
 data_csv = load_csv_to_dict_list('./csv/QR960_40d2a370.csv')
 print(len(data_csv))
@@ -53,8 +53,15 @@ last_fl31 = ""  #deprecated
 temp_fl31 = []
 temp_fl32 = []
 temp_fl35 = []
+tmp_alt = []
 duration_tmp = 0
+maximum_altitude = 0
+
+
 for alt in data_csv:
+
+
+    tmp_alt.append(alt.get('Altitude'))
 
     # -------Flightlevel 31
     if 30500 < int(alt.get('Altitude')) < 31500:
@@ -85,6 +92,10 @@ for alt in data_csv:
             duration_tmp = calculate_duration(temp_fl35[0].get('UTC'), temp_fl35[-1].get('UTC'))
             add_fl35 = add_fl35 + duration_tmp
             temp_fl35 = []
+
     
     #duration_temp = calculate_duration(first_fl31, last_fl31)
     #add_fl31 = add_fl31 + duration_temp
+
+maximum_altitude = max_alt(tmp_alt)
+print(f"The maximum altitude was {maximum_altitude}")
