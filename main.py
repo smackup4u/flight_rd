@@ -1,7 +1,7 @@
 # CSV scratch
 
 
-from csv_agent import load_csv_to_dict_list, calculate_duration, seconds_to_hours, max_alt
+from csv_agent import load_csv_to_dict_list, calculate_duration, seconds_to_hours, max_alt, get_fl_duration
 
 data_csv = load_csv_to_dict_list('./csv/QR960_40d2a370.csv')
 print(len(data_csv))
@@ -98,4 +98,5 @@ for alt in data_csv:
     #add_fl31 = add_fl31 + duration_temp
 
 maximum_altitude = max_alt(tmp_alt)
+_, _, _, _, duration_fl35, _ = get_fl_duration(data_csv)
 print(f"The maximum altitude was {maximum_altitude}")

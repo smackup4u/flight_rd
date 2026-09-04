@@ -52,6 +52,7 @@ def seconds_to_hours(seconds):   #non mutual, just returns a string
     minutes = (seconds % 3600) // 60
     return f"{hours} hours and {minutes} minutes"
 
+# maximum Altitude
 def max_alt(list_altitude: list) -> int | None:
     maximum = 0
     if len(list_altitude) > 0:
@@ -62,6 +63,62 @@ def max_alt(list_altitude: list) -> int | None:
         return maximum
     else:
         return None
+
+# Get the flight duration for each FL in seconds
+def get_fl_duration(csv_input: list[dict]):
+    #lists to store datapoints
+    temp_fl31 = []
+    temp_fl32 = []
+    temp_fl33 = []
+    temp_fl34 = []
+    temp_fl35 = []
+    temp_fl36 = []
+
+    #duration for each FL in seconds, data will be returned
+    add_fl31 = 0
+    add_fl32 = 0
+    add_fl33 = 0
+    add_fl34 = 0
+    add_fl35 = 0
+    add_fl36 = 0
+                        
+    for alt in csv_input:
+
+
+
+        # -------Flightlevel 31
+        if 30500 < int(alt.get('Altitude')) < 31500:
+            #first_fl31 = alt.get('UTC')
+            temp_fl31.append(alt)
+        else:
+            if len(temp_fl31) > 0:
+                duration_tmp = calculate_duration(temp_fl31[0].get('UTC'), temp_fl31[-1].get('UTC'))
+                add_fl31 = add_fl31 + duration_tmp
+                temp_fl31 = []
+
+        # -------Flightlevel 32
+        if 31501 < int(alt.get('Altitude')) < 32500:
+                #first_fl31 = alt.get('UTC')
+                temp_fl32.append(alt)
+        else:
+            if len(temp_fl32) > 0:
+                duration_tmp = calculate_duration(temp_fl32[0].get('UTC'), temp_fl32[-1].get('UTC'))
+                add_fl32 = add_fl32 + duration_tmp
+                temp_fl32 = []
+
+        # -------Flightlevel 35
+        if 34501 < int(alt.get('Altitude')) < 35500:
+                #first_fl31 = alt.get('UTC')
+                temp_fl35.append(alt)
+        else:
+            if len(temp_fl35) > 0:
+                duration_tmp = calculate_duration(temp_fl35[0].get('UTC'), temp_fl35[-1].get('UTC'))
+                add_fl35 = add_fl35 + duration_tmp
+                temp_fl35 = []
+
+        
+    #return each value 
+    return add_fl31, add_fl32, add_fl33, add_fl34, add_fl35, add_fl36
 
 if __name__ == "__main__":
     # --- TEST SECTION ---
