@@ -116,9 +116,44 @@ def get_fl_duration(csv_input: list[dict]):
                 add_fl35 = add_fl35 + duration_tmp
                 temp_fl35 = []
 
-        
+        #breakpoint()
     #return each value 
     return add_fl31, add_fl32, add_fl33, add_fl34, add_fl35, add_fl36
+
+
+def get_taxi_outbound(csv_input: list[dict]):
+    #lists to store datapoints
+    temp_taxi = []
+   
+
+    #duration for each FL in seconds, data will be returned
+    add_taxi_outbound = 0
+    add_taxi_inbound = 0
+
+    #get first timestamp, important for diffirentiate taxi outbound or taxi inbound
+    begin = csv_input[0].get('UTC')
+    for alt in csv_input:
+
+
+        # get taxi datapoint (speed > 0 alt < 1)
+        if int(alt.get('Speed')) > 0 and int(alt.get('Altitude')) < 1:
+            #first_fl31 = alt.get('UTC')
+            temp_taxi.append(alt)
+        else:
+            if len(temp_taxi) > 0:
+                time = calculate_duration(begin, temp_taxi[-1].get('UTC'))
+                duration_tmp = calculate_duration(temp_taxi[0].get('UTC'), temp_taxi[-1].get('UTC'))
+                if time < 2000:
+                    add_taxi_outbound = add_taxi_outbound + duration_tmp
+                else:
+                    add_taxi_inbound = add_taxi_inbound + duration_tmp
+                temp_taxi = []
+
+
+        #breakpoint()
+    #return each value 
+    return add_taxi_outbound, add_taxi_inbound
+
 
 if __name__ == "__main__":
     # --- TEST SECTION ---

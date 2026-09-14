@@ -1,7 +1,7 @@
 # CSV scratch
 
 
-from csv_agent import load_csv_to_dict_list, calculate_duration, seconds_to_hours, max_alt, get_fl_duration
+from csv_agent import load_csv_to_dict_list, calculate_duration, seconds_to_hours, max_alt, get_fl_duration, get_taxi_outbound
 
 data_csv = load_csv_to_dict_list('./csv/QR960_40d2a370.csv')
 print(len(data_csv))
@@ -31,6 +31,7 @@ fl34 = 0
 fl35 = 0
 fl36 = 0
 
+# Count datapoints, not really usable for analizing
 for alt in data_csv:
     # FL 31
     
@@ -54,6 +55,7 @@ temp_fl31 = []
 temp_fl32 = []
 temp_fl35 = []
 tmp_alt = []
+#breakpoint()
 duration_tmp = 0
 maximum_altitude = 0
 
@@ -99,4 +101,5 @@ for alt in data_csv:
 
 maximum_altitude = max_alt(tmp_alt)
 _, _, _, _, duration_fl35, _ = get_fl_duration(data_csv)
+duration_taxi, _ = get_taxi_outbound(data_csv)
 print(f"The maximum altitude was {maximum_altitude}")
