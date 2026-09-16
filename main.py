@@ -1,14 +1,15 @@
 # CSV scratch
 
 
-from csv_agent import load_csv_to_dict_list, calculate_duration, seconds_to_hours, max_alt, get_fl_duration, get_taxi_outbound
+from csv_agent import load_csv_to_dict_list, calculate_duration, seconds_to_hours, max_alt, get_fl_duration, get_taxi_duration
 
 data_csv = load_csv_to_dict_list('./csv/QR960_40d2a370.csv')
 print(len(data_csv))
 print('First datapoint')
 print(data_csv[0])
 print('last datapoint')
-print(data_csv[len(data_csv)-1])
+print(data_csv[-1])
+
 duration = calculate_duration(data_csv[0].get('UTC'), data_csv[len(data_csv)-1].get('UTC'))
 print(f"The duration was: {duration}")
 real_depature = ''
@@ -64,7 +65,7 @@ for alt in data_csv:
 
 
     tmp_alt.append(alt.get('Altitude'))
-
+    # old code, will keep it for backup
     # -------Flightlevel 31
     if 30500 < int(alt.get('Altitude')) < 31500:
         #first_fl31 = alt.get('UTC')
@@ -99,7 +100,10 @@ for alt in data_csv:
     #duration_temp = calculate_duration(first_fl31, last_fl31)
     #add_fl31 = add_fl31 + duration_temp
 
+callsign = data_csv[0].get('Callsign')
 maximum_altitude = max_alt(tmp_alt)
 _, _, _, _, duration_fl35, _ = get_fl_duration(data_csv)
-duration_taxi, _ = get_taxi_outbound(data_csv)
+taxi_out, taxi_in = get_taxi_duration(data_csv)
+print(f"The flight {callsign} was {seconds_to_hours(taxi_out)} in taxi outbound (from gate to takeoff)")
+print(f"The flight {callsign} was {seconds_to_hours(taxi_in)} in taxi inbound (from landing to gate)")
 print(f"The maximum altitude was {maximum_altitude}")

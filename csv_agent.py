@@ -120,8 +120,8 @@ def get_fl_duration(csv_input: list[dict]):
     #return each value 
     return add_fl31, add_fl32, add_fl33, add_fl34, add_fl35, add_fl36
 
-
-def get_taxi_outbound(csv_input: list[dict]):
+# Method for taxi time 
+def get_taxi_duration(csv_input: list[dict]):
     #lists to store datapoints
     temp_taxi = []
    
