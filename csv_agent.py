@@ -52,6 +52,11 @@ def seconds_to_hours(seconds):   #non mutual, just returns a string
     minutes = (seconds % 3600) // 60
     return f"{hours} hours and {minutes} minutes"
 
+def seconds_to_minutes(seconds: int) -> str:
+    minutes = seconds // 60
+    rest = seconds % 60
+    return f"{minutes} min and {rest} sec"
+
 # maximum Altitude
 def max_alt(list_altitude: list) -> int | None:
     maximum = 0
@@ -73,6 +78,11 @@ def get_fl_duration(csv_input: list[dict]):
     temp_fl34 = []
     temp_fl35 = []
     temp_fl36 = []
+    temp_fl37 = []
+    temp_fl38 = []
+    temp_fl39 = []
+    temp_fl40 = []
+                    
 
     #duration for each FL in seconds, data will be returned
     add_fl31 = 0
@@ -81,6 +91,11 @@ def get_fl_duration(csv_input: list[dict]):
     add_fl34 = 0
     add_fl35 = 0
     add_fl36 = 0
+    add_fl37 = 0
+    add_fl38 = 0
+    add_fl39 = 0
+    add_fl40 = 0
+    
                         
     for alt in csv_input:
 
@@ -116,9 +131,31 @@ def get_fl_duration(csv_input: list[dict]):
                 add_fl35 = add_fl35 + duration_tmp
                 temp_fl35 = []
 
+        # -------Flightlevel 38
+        if 37501 < int(alt.get('Altitude')) < 38500:
+                #first_fl31 = alt.get('UTC')
+                temp_fl38.append(alt)
+        else:
+            if len(temp_fl38) > 0:
+                duration_tmp = calculate_duration(temp_fl38[0].get('UTC'), temp_fl38[-1].get('UTC'))
+                add_fl38 = add_fl38 + duration_tmp
+                temp_fl38 = []
+
+
+        # -------Flightlevel 39
+        if 38501 < int(alt.get('Altitude')) < 39500:
+                #first_fl31 = alt.get('UTC')
+                temp_fl39.append(alt)
+        else:
+            if len(temp_fl39) > 0:
+                duration_tmp = calculate_duration(temp_fl39[0].get('UTC'), temp_fl39[-1].get('UTC'))
+                add_fl39 = add_fl39 + duration_tmp
+                temp_fl39 = []
+
+
         #breakpoint()
     #return each value 
-    return add_fl31, add_fl32, add_fl33, add_fl34, add_fl35, add_fl36
+    return add_fl31, add_fl32, add_fl33, add_fl34, add_fl35, add_fl36, add_fl37, add_fl38, add_fl39, add_fl40
 
 # Method for taxi time 
 def get_taxi_duration(csv_input: list[dict]):

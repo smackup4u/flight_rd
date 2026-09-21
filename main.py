@@ -1,7 +1,13 @@
 # CSV scratch
 
-
-from csv_agent import load_csv_to_dict_list, calculate_duration, seconds_to_hours, max_alt, get_fl_duration, get_taxi_duration
+#parentheses wrapping
+from csv_agent import (load_csv_to_dict_list, 
+                       calculate_duration, 
+                       seconds_to_hours, 
+                       max_alt, 
+                       get_fl_duration, 
+                       get_taxi_duration, 
+                       seconds_to_minutes)
 
 data_csv = load_csv_to_dict_list('./csv/QR960_40d2a370.csv')
 print(len(data_csv))
@@ -102,8 +108,13 @@ for alt in data_csv:
 
 callsign = data_csv[0].get('Callsign')
 maximum_altitude = max_alt(tmp_alt)
-_, _, _, _, duration_fl35, _ = get_fl_duration(data_csv)
+_, _, _, _, duration_fl35, _, _, duration_fl38, duration_fl39, _ = get_fl_duration(data_csv)
+print("Duration per FL")
+print("-----------------")
+print(f"In FL35: {seconds_to_hours(duration_fl35)}")
+print(f"In FL38: {seconds_to_hours(duration_fl38)}")
+print(f"In FL39: {seconds_to_hours(duration_fl39)}")
 taxi_out, taxi_in = get_taxi_duration(data_csv)
-print(f"The flight {callsign} was {seconds_to_hours(taxi_out)} in taxi outbound (from gate to takeoff)")
-print(f"The flight {callsign} was {seconds_to_hours(taxi_in)} in taxi inbound (from landing to gate)")
+print(f"The flight {callsign} was {seconds_to_minutes(taxi_out)} in taxi outbound (from gate to takeoff)")
+print(f"The flight {callsign} was {seconds_to_minutes(taxi_in)} in taxi inbound (from landing to gate)")
 print(f"The maximum altitude was {maximum_altitude}")
