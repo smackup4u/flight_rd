@@ -121,6 +121,27 @@ def get_fl_duration(csv_input: list[dict]):
                 add_fl32 = add_fl32 + duration_tmp
                 temp_fl32 = []
 
+        # -------Flightlevel 33
+        if 32501 < int(alt.get('Altitude')) < 33500:
+                #first_fl31 = alt.get('UTC')
+                temp_fl33.append(alt)
+        else:
+            if len(temp_fl33) > 0:
+                duration_tmp = calculate_duration(temp_fl33[0].get('UTC'), temp_fl33[-1].get('UTC'))
+                add_fl33 = add_fl33 + duration_tmp
+                temp_fl33 = []
+
+
+        # -------Flightlevel 34
+        if 33501 < int(alt.get('Altitude')) < 34500:
+                #first_fl31 = alt.get('UTC')
+                temp_fl34.append(alt)
+        else:
+            if len(temp_fl34) > 0:
+                duration_tmp = calculate_duration(temp_fl34[0].get('UTC'), temp_fl34[-1].get('UTC'))
+                add_fl34 = add_fl34 + duration_tmp
+                temp_fl34 = []                        
+
         # -------Flightlevel 35
         if 34501 < int(alt.get('Altitude')) < 35500:
                 #first_fl31 = alt.get('UTC')
@@ -130,6 +151,28 @@ def get_fl_duration(csv_input: list[dict]):
                 duration_tmp = calculate_duration(temp_fl35[0].get('UTC'), temp_fl35[-1].get('UTC'))
                 add_fl35 = add_fl35 + duration_tmp
                 temp_fl35 = []
+
+        # -------Flightlevel 36
+        if 35501 < int(alt.get('Altitude')) < 36500:
+                #first_fl31 = alt.get('UTC')
+                temp_fl36.append(alt)
+        else:
+            if len(temp_fl36) > 0:
+                duration_tmp = calculate_duration(temp_fl36[0].get('UTC'), temp_fl36[-1].get('UTC'))
+                add_fl36 = add_fl36 + duration_tmp
+                temp_fl36 = []
+
+        # -------Flightlevel 37
+        if 36501 < int(alt.get('Altitude')) < 37500:
+                #first_fl31 = alt.get('UTC')
+                temp_fl37.append(alt)
+        else:
+            if len(temp_fl37) > 0:
+                duration_tmp = calculate_duration(temp_fl37[0].get('UTC'), temp_fl37[-1].get('UTC'))
+                add_fl37 = add_fl37 + duration_tmp
+                temp_fl37 = []
+
+
 
         # -------Flightlevel 38
         if 37501 < int(alt.get('Altitude')) < 38500:
@@ -151,6 +194,18 @@ def get_fl_duration(csv_input: list[dict]):
                 duration_tmp = calculate_duration(temp_fl39[0].get('UTC'), temp_fl39[-1].get('UTC'))
                 add_fl39 = add_fl39 + duration_tmp
                 temp_fl39 = []
+
+        # -------Flightlevel 40
+        if 39501 < int(alt.get('Altitude')) < 40500:
+                #first_fl31 = alt.get('UTC')
+                temp_fl40.append(alt)
+        else:
+            if len(temp_fl40) > 0:
+                duration_tmp = calculate_duration(temp_fl40[0].get('UTC'), temp_fl40[-1].get('UTC'))
+                add_fl40 = add_fl40 + duration_tmp
+                temp_fl40 = []
+
+
 
 
         #breakpoint()

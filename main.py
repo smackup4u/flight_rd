@@ -108,10 +108,13 @@ for alt in data_csv:
 
 callsign = data_csv[0].get('Callsign')
 maximum_altitude = max_alt(tmp_alt)
-_, _, _, _, duration_fl35, _, _, duration_fl38, duration_fl39, _ = get_fl_duration(data_csv)
+duration_fl31, duration_fl32, duration_fl33, duration_fl34, duration_fl35, duration_fl36, duration_fl37, duration_fl38, duration_fl39, duration_fl40 = get_fl_duration(data_csv)
 print("Duration per FL")
 print("-----------------")
+print(f"In FL33: {seconds_to_hours(duration_fl33)}")
 print(f"In FL35: {seconds_to_hours(duration_fl35)}")
+print(f"In FL37: {seconds_to_hours(duration_fl37)}")
+
 print(f"In FL38: {seconds_to_hours(duration_fl38)}")
 print(f"In FL39: {seconds_to_hours(duration_fl39)}")
 taxi_out, taxi_in = get_taxi_duration(data_csv)
