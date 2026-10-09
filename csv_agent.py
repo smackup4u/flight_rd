@@ -224,11 +224,13 @@ def get_taxi_duration(csv_input: list[dict]):
 
     #get first timestamp, important for diffirentiate taxi outbound or taxi inbound
     begin = csv_input[0].get('UTC')
+    #get last datapoint to still get inbound taxi when speed is over 0 on last datapoint
+    last_data = csv_input[-1]
     for alt in csv_input:
 
 
         # get taxi datapoint (speed > 0 alt < 1)
-        if int(alt.get('Speed')) > 0 and int(alt.get('Altitude')) < 1:
+        if int(alt.get('Speed')) > 0 and int(alt.get('Altitude')) < 1 and alt != last_data:
             #first_fl31 = alt.get('UTC')
             temp_taxi.append(alt)
         else:

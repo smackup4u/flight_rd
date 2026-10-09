@@ -9,7 +9,9 @@ from csv_agent import (load_csv_to_dict_list,
                        get_taxi_duration, 
                        seconds_to_minutes)
 
-data_csv = load_csv_to_dict_list('./csv/QR960_40d2a370.csv')
+data_csv = load_csv_to_dict_list('./csv/WY118_4200636a.csv')
+
+#data_csv = load_csv_to_dict_list('./csv/QR960_40d2a370.csv')
 print(len(data_csv))
 print('First datapoint')
 print(data_csv[0])
