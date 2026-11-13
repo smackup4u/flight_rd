@@ -9,6 +9,10 @@ from csv_agent import (load_csv_to_dict_list,
                        get_taxi_duration, 
                        seconds_to_minutes)
 
+''' --------------
+Insert CSV sources here. Right now only one file per run is supported. Comment out all other files.
+'''
+
 data_csv = load_csv_to_dict_list('./csv/WY118_4200636a.csv')
 
 #data_csv = load_csv_to_dict_list('./csv/QR960_40d2a370.csv')
